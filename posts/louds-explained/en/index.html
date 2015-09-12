@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Cache-Control" content="no-siteapp"><!-- Damn Baidu -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script>//html5.addElements('my tags')</script>
+    <![endif]-->
+
+    <title>LOUDS Explained - 囚</title>
+
+    <meta name="robots" content="nofollow">
+    <link rel="icon" size="48x48" href="/test/favicon.ico">
+    <link rel="icon" size="240x240" type="image/png" href="/test/favicon240.png">
+    <link rel="icon" size="any" type="image/svg+xml" href="/test/favicon.svg">
+
+    
+  
+    <link rel="stylesheet" href="/test/data/css/style.css">
+    
+  <script src="/test/data/js/misc.js"></script>
+
+
+    
+  </head>
+
+  <body>
+    
+
+<div class="ring-force"></div>
+
+<div class="blog-page">
+  <div class="content">
+    <div class="title">
+      <a href="https://iakwings.github.io/test/">LOUDS Explained</a>
+    </div>
+    <article class="text clearfix"><header>
+<p>This article is inspired by “<a class="kaj-link-external" href="http://d.hatena.ne.jp/takeda25/20120421/1335019644">簡潔データ構造<sp></sp>LOUDS<sp></sp>の解説</a>” written by <u>真鍋宏史</u>.</p>
+</header>
+<div id="kaj-contents">
+<div class="kaj-contents-title">
+<span>Contents</span>
+</div>
+<ul>
+<li>
+<a href="#kaj-section-1">What is LOUDS</a>
+</li>
+<li>
+<a href="#kaj-section-2">Generate bit-string</a>
+</li>
+<li>
+<a href="#kaj-section-3">LOUDS<sp></sp>indexing</a>
+<ul>
+<li>
+<a href="#kaj-section-3-1">Convertion between LOUDS indexes and node numbers</a>
+</li>
+<li>
+<a href="#kaj-section-3-2">Get the number of the parent from the index of a child</a>
+</li>
+<li>
+<a href="#kaj-section-3-3">Get the indexes of children from the number of a parent</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#kaj-section-4">Use trie with LOUDS</a>
+</li>
+</ul>
+</div>
+<div id="kaj-section-1" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">What is LOUDS</a></h1>
+<p>LOUDS (Level Order Unary Degree Sequence) is a highly efficient data structure to represent the linking of nodes in a tree. Unlike the traditional pointer-based representation, this structure only needs an array of bits, which consumes much less space.</p>
+</div>
+<div id="kaj-section-2" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">Generate bit-string</a></h1>
+<p>Take this tree as an example:</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center bg-light">
+<img alt="1 -&gt; { 2, 3, 4 }; 2 -&gt; 5; 4 -&gt; { 6, 7, 8 }; 7 -&gt; 9; 8 -&gt; { 10, 11 };" data-src="/test/upload/20150516_04.png" data-srcset="/test/upload/20150516_04.png 2x, /test/upload/20150516_04-1x.png 1x"><figcaption>fig.1</figcaption>
+</figure>
+<!-- ASCII
+         1
+        /|\
+       2 3 4
+      /   /|\
+     5   6 7 8
+          /  |\
+         9  10 11 -->
+</div>
+<p>With LOUDS, you can just write down this bit-string:</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="1 0 1 1 1 0 1 0 0 1 1 1 0 0 0 1 0 1 1 0 0 0 0" data-src="/test/upload/20150516_01.png" data-srcset="/test/upload/20150516_01.png 2x, /test/upload/20150516_01-1x.png 1x"><figcaption>fig.2</figcaption>
+</figure>
+</div>
+<p>And this string is easy to generate: Just do a level order traversal, from top to bottom and from left to right, and examine each node:</p>
+<div class="kaj-indented">
+<p>1. Append N 1s to the string if it has N child nodes linked to it.</p>
+<p>2. Then append one 0 to the string.</p>
+</div>
+<p>Then we can divide the string with 0 into 11 blocks:</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="1.0|1.1.1.0|1.0|0|1.1.1.0|0|0|1.0|1.1.0|0|0|0" data-src="/test/upload/20150516_02.png" data-srcset="/test/upload/20150516_02.png 2x, /test/upload/20150516_02-1x.png 1x"><figcaption>fig.3</figcaption>
+</figure>
+</div>
+<p>Wait, there are 12 blocks? Emmm…I&#39;ve just added a virtual node and make it the parent of node “1”. This is just how LOUDS is constructed. ;-)</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center bg-light">
+<img alt="0 -&gt; 1; 1 -&gt; { 2, 3, 4 }; 2 -&gt; 5; 4 -&gt; { 6, 7, 8 }; 7 -&gt; 9; 8 -&gt; { 10, 11 };" data-src="/test/upload/20150516_05.png" data-srcset="/test/upload/20150516_05.png 2x, /test/upload/20150516_05-1x.png 1x"><figcaption>fig.4</figcaption>
+</figure>
+<!-- ASCII
+      0   |     1     |   2   |  3  |     4     |  5  |  6  |   7   |    8    |  9  | 10  | 11
+     1.0  |  1.1.1.0  |  1.0  |  0  |  1.1.1.0  |  0  |  0  |  1.0  |  1.1.0  |  0  |  0  |  0 -->
+</div>
+<p>As such, it just needs 23 bits to store the linking information.</p>
+<p>Usually the optimal pointer-based solution take up O(N*log(N)) bits (the data structure is illustrated below). And actually this will need 2*11*32 or 2*11*64 bits, which is a lot of waste compared with the LOUDS solution. However, LOUDS can not be modified easily, so in practice we first construct the tree with pointers, and compress it using LOUDS later.</p>
+<div class="kaj-indented">
+<pre class="lang-cpp">
+<span class="hljs-keyword">struct</span> Node {
+    Node* first_child;
+    Node* next_sibling;
+};  <span class="hljs-comment">// good for level order traversal</span>
+</pre>
+</div>
+<p>It is easy to transform the bit-string back into the linking as well, so just figure it out yourself.</p>
+</div>
+<div id="kaj-section-3" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">LOUDS<sp></sp>indexing</a></h1>
+<p>Now let&#39;s see how to search with LOUDS.</p>
+<p>I&#39;ll reuse the tree above:</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center bg-light">
+<img alt="1 -&gt; { 2, 3, 4 }; 2 -&gt; 5; 4 -&gt; { 6, 7, 8 }; 7 -&gt; 9; 8 -&gt; { 10, 11 };" data-src="/test/upload/20150516_04.png" data-srcset="/test/upload/20150516_04.png 2x, /test/upload/20150516_04-1x.png 1x"><figcaption>fig.5</figcaption>
+</figure>
+</div>
+<p>and its LOUDS string:</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="1.0|1.1.1.0|1.0|0|1.1.1.0|0|0|1.0|1.1.0|0|0|0" data-src="/test/upload/20150516_03.png" data-srcset="/test/upload/20150516_03.png 2x, /test/upload/20150516_03-1x.png 1x"><figcaption>fig.6</figcaption>
+</figure>
+</div>
+<section id="kaj-section-3-1" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">Convertion between LOUDS indexes and node numbers</a></h2>
+<p>It&#39;s not hard to convert a LOUDS index to a node number and vice versa. Just count the 1s, which seems slow and takes O(N) time, but with some optimization like binary-search and pre-computed search tables that will get much faster. I&#39;m not going to dive deep into it right now.</p>
+</section>
+<section id="kaj-section-3-2" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">Get the number of the parent from the index of a child</a></h2>
+<p>Just count the 0s from the left till the child. From pic.7 we can see the node with index 11 has a parent with number 4.</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="由子節點索引號得到父節點號" data-src="/test/upload/20150516_06.png" data-srcset="/test/upload/20150516_06.png 2x, /test/upload/20150516_06-1x.png 1x"><figcaption>fig.7</figcaption>
+</figure>
+</div>
+</section>
+<section id="kaj-section-3-3" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">Get the indexes of children from the number of a parent</a></h2>
+<p>Just count the 0s from the left till the parent. From pic.8 we can see the node with number 4 has children with indexes 9, 10 and 11.</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="由父節點號得到子節點索引號" data-src="/test/upload/20150516_07.png" data-srcset="/test/upload/20150516_07.png 2x, /test/upload/20150516_07-1x.png 1x"><figcaption>fig.8</figcaption>
+</figure>
+</div>
+</section>
+</div>
+<div id="kaj-section-4" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">Use trie with LOUDS</a></h1>
+<p>We have already know the basic of LOUDS. Let&#39;s try to compress a trie with it. Here is a trie for Chinese words storing and query:</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center bg-light">
+<img alt="&quot;&quot; -&gt; &quot;一&quot;; &quot;&quot; -&gt; &quot;兩&quot;; &quot;&quot; -&gt; &quot;今&quot;; &quot;一&quot; -&gt; &quot;本&quot;; &quot;本&quot; -&gt; &quot;書&quot;; &quot;本&quot; -&gt; &quot;萬&quot; -&gt; &quot;利&quot;; &quot;一&quot; -&gt; &quot;根&quot;; &quot;根&quot; -&gt; &quot;筋&quot;; &quot;兩&quot; -&gt; &quot;人&quot;; &quot;今&quot; -&gt; &quot;天&quot;;" data-src="/test/upload/20150516_08.png" data-srcset="/test/upload/20150516_08.png 2x, /test/upload/20150516_08-1x.png 1x"><figcaption>fig.9</figcaption>
+</figure>
+</div>
+<p>The LOUDS string is so simple:</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="1.0|1.1.1.0|1.1.0|1.0|1.0|1.1.0|1.0|0|0|0|1.0|0|0" data-src="/test/upload/20150516_09.png" data-srcset="/test/upload/20150516_09.png 2x, /test/upload/20150516_09-1x.png 1x"><figcaption>fig.10</figcaption>
+</figure>
+</div>
+<p>Now try to match the word “一根筋”:</p>
+<div class="kaj-indented">
+<ol>
+<li><p>First, we start at the root node and examine the consecutive 1s right after the 1st zero, and we can see one of the corresponding nodes, node “2”, has the first character “一”.</p>
+<figure class="kaj-image-png center">
+<img data-src="/test/upload/20150516_10.png" data-srcset="/test/upload/20150516_10.png 2x, /test/upload/20150516_10-1x.png 1x"><figcaption>fig.11</figcaption>
+</figure></li>
+<li><p>Then we can go forward and examine the consecutive 1s after the 2nd zero, and find two characters, one of them is the second needed character “根”, corresponding to node number 6.</p>
+<figure class="kaj-image-png center">
+<img data-src="/test/upload/20150516_11.png" data-srcset="/test/upload/20150516_11.png 2x, /test/upload/20150516_11-1x.png 1x"><figcaption>fig.12</figcaption>
+</figure></li>
+<li><p>With the same method, we find the last character “筋” after the 6th zero. Done.</p>
+<figure class="kaj-image-png center">
+<img data-src="/test/upload/20150516_12.png" data-srcset="/test/upload/20150516_12.png 2x, /test/upload/20150516_12-1x.png 1x"><figcaption>fig.13</figcaption>
+</figure></li>
+</ol>
+</div>
+<p>In fact, we need another bit-string to mark the terminals of words, because one node may lead to multiple nodes and it is possibly in the middle of a word.</p>
+</div>
+<footer>
+<table class="kaj-cite-def" id="kaj-cite-def-Reference">
+<tr>
+<td class="kaj-label">[Reference]</td><td><a class="kaj-link-external" href="http://d.hatena.ne.jp/takeda25/20120421/1335019644">簡潔データ構造<sp></sp>LOUDS<sp></sp>の解説</a></td>
+</tr>
+</table>
+</footer></article>
+    <div class="meta">
+      
+<div class="license">
+  
+  <div>該文寫於 2015 年 05 月 30 日</div>
+  <div>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">Creative Commons BY-NC-SA 4.0 © 2015</a>
+    <a rel="author" href="/test/pages/about/">J.W</a>
+  </div>
+  
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+<link rel="stylesheet" href="/test/data/css/highlight.css">
+
+
+
+<script src="/test/data/js/belazy.js"></script>
+<script src="/test/data/js/belazy.cfg.js"></script>
+
+
+
+
+
+    
+  </body>
+
+</html>

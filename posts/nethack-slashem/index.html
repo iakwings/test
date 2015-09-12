@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Cache-Control" content="no-siteapp"><!-- Damn Baidu -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script>//html5.addElements('my tags')</script>
+    <![endif]-->
+
+    <title>NetHack 與 SLASH&#39;EM 入門指南 - 囚</title>
+
+    <meta name="robots" content="nofollow">
+    <link rel="icon" size="48x48" href="/test/favicon.ico">
+    <link rel="icon" size="240x240" type="image/png" href="/test/favicon240.png">
+    <link rel="icon" size="any" type="image/svg+xml" href="/test/favicon.svg">
+
+    
+  
+    <link rel="stylesheet" href="/test/data/css/style.css">
+    
+  <script src="/test/data/js/misc.js"></script>
+
+
+    
+  </head>
+
+  <body>
+    
+
+<div class="ring-force"></div>
+
+<div class="blog-page">
+  <div class="content">
+    <div class="title">
+      <a href="https://iakwings.github.io/test/">NetHack 與 SLASH&#39;EM 入門指南</a>
+    </div>
+    <article class="text clearfix"><header>
+<p>歡迎來到<sp></sp>NetHack<sp></sp>與<sp></sp>SLASH&#39;EM<sp></sp>的世界。</p>
+</header>
+<div id="kaj-contents">
+<div class="kaj-contents-title">
+<span>目錄</span>
+</div>
+<ul>
+<li>
+<a href="#kaj-section-1">前言</a>
+</li>
+<li>
+<a href="#kaj-section-2">通用常識</a>
+<ul>
+<li>
+<a href="#kaj-section-2-1">關於任務</a>
+</li>
+<li>
+<a href="#kaj-section-2-2">關於環境</a>
+</li>
+<li>
+<a href="#kaj-section-2-3">關於食物</a>
+</li>
+<li>
+<a href="#kaj-section-2-4">關於怪物</a>
+</li>
+<li>
+<a href="#kaj-section-2-5">關於物品</a>
+</li>
+<li>
+<a href="#kaj-section-2-6">關於技能</a>
+</li>
+<li>
+<a href="#kaj-section-2-7">關於陣營</a>
+</li>
+<li>
+<a href="#kaj-section-2-8">關於職業</a>
+</li>
+<li>
+<a href="#kaj-section-2-9">關於種族</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#kaj-section-3">遊戲操作</a>
+<ul>
+<li>
+<a href="#kaj-section-3-1">統計數據</a>
+</li>
+<li>
+<a href="#kaj-section-3-2">符號解釋</a>
+</li>
+<li>
+<a href="#kaj-section-3-3">按鍵說明</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="kaj-section-1" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">前言</a></h1>
+<p>這篇教程只是用來給大家補充一些地下世界生存常識的，並非用於作弊～我的目的就和某些前輩一樣，給大家傳授一些異域常識，剩下的樂趣還有待各位慢慢發現。若要瞭解更多更詳盡的資訊，可查看腳註的<a class="kaj-cite-ref" href="#kaj-cite-def-%E7%9B%B8%E9%97%9C%E9%80%A3%E7%B5%90">相關連結</a>。</p>
+<figure class="kaj-image-png center">
+<img alt="SLASH&#39;EM 的 ASCII 界面截圖。" src="/test/upload/20130822_01.png"><figcaption>SLASH&#39;EM<sp></sp>中隱身的玩家被〔d: winter wolf〕的冰凍射線攻擊的場面。</figcaption>
+</figure>
+<p><a class="kaj-link-external" href="http://www.slashem.org">SLASH&#39;EM</a><sp></sp>是<sp></sp><a class="kaj-link-external" href="http://www.nethack.org">NetHack</a><sp></sp>的一個衍生版本，提供更多玩家職業和種族，想必大家都瞭解，我就不多說了。不得不說的是<sp></sp>NetHack 3.4.3<sp></sp>挺多小<sp></sp>bug<sp></sp>的，幸好多數都不容易碰到，不過我還是建議找一些別人做好的補丁用用（要自行編譯遊戲程序）。SLASH&#39;EM<sp></sp>有穩定版和開發版，開發版中加入了不少新鮮元素，不過也要自己編譯遊戲程序才能嘗鮮。讓人有點鬱悶的是，這兩個遊戲都好久才更新一次的……</p>
+<p>遊戲官方主頁已經提供了遊戲下載資源。想玩中文版？iOS<sp></sp>手機應用商店有「迷宮駭客」，不過我不知道那個遊戲的具體運行機制是否和原版完全一樣，那個遊戲的作者還在百度貼吧發了個<sp></sp>Windows<sp></sp>平臺帶<sp></sp>GUI<sp></sp>的中文版，我也不知道有沒有打補丁。</p>
+<p>假如你一生只玩一個遊戲，請考慮小巧而不失趣味的<sp></sp>NetHack<sp></sp>或<sp></sp>SLASH&#39;EM<sp></sp>吧！</p>
+<p>該手冊會隨着我的遊戲經驗不斷更新改進。最後一節附送遊戲操作指南。</p>
+</div>
+<div id="kaj-section-2" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">通用常識</a></h1>
+<section id="kaj-section-2-1" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">關於任務</a></h2>
+<ul>
+<li class="kaj-item-x">玩家要到地城的最深處取回眞正的<sp></sp>Yendor<sp></sp>護身符，並重返地面，被提升爲不朽的半神。</li>
+<li class="kaj-item-x">最有錢的傢伙的名字是<sp></sp>Croesus，瞭解一下總有好處的。</li>
+<li class="kaj-item-x">玩家的死亡是無法逆轉的，存檔功能只能用於暫時離開遊戲。</li>
+<li class="kaj-item-x">玩家的屍體有可能會被保留下來，以後再玩時有機會遇到。（奸笑）</li>
+</ul>
+</section>
+<section id="kaj-section-2-2" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">關於環境</a></h2>
+<ul>
+<li class="kaj-item-x">玩家身處一個魔法奇幻世界，說不定就是傳說中的碟形世界呢！</li>
+<li class="kaj-item-x">見到屍體不要慌，錯了！我是指屍體周圍的東西啦。</li>
+<li class="kaj-item-x">在地面刻下「Elbereth」女神的大名可震攝某些怪物。（一般編譯遊戲時都已加入此功能）</li>
+<li class="kaj-item-x">假如被巨石困住了，可以卸下部分裝備鑽出去。</li>
+<li class="kaj-item-x">找不到路了，可在可疑的地方搜索多一會看能不能發現暗門，有些暗門還要踼一踼才容易發現。實在是找不到路了，就用鎬子（pick、pickaxe）破牆挖坑。故意跑到傳送陣陷阱碰運氣也行，方法多着啊，有沒有條件就難說了……</li>
+</ul>
+</section>
+<section id="kaj-section-2-3" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">關於食物</a></h2>
+<ul>
+<li class="kaj-item-x">食物是有保質期的，不過某些保質期特別長，例如地衣怪（lichen）的屍體。</li>
+<li class="kaj-item-x">地衣怪（lichen）的屍體不是葷食。</li>
+<li class="kaj-item-x">屍體可能會有毒，尤其是腐爛的屍體。中毒後力量點可能會永久下降。</li>
+<li class="kaj-item-x">藥水可以混合，結果未知。藥水用水池的水兌兩次會變成清水。</li>
+<li class="kaj-item-x">將清水放在同一陣營的祭壇上進行祈禱可獲得聖水。</li>
+</ul>
+</section>
+<section id="kaj-section-2-4" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">關於怪物</a></h2>
+<ul>
+<li class="kaj-item-x">玩家的寵物被拋棄太久會不認主人的，它可能比主人強大得多。</li>
+<li class="kaj-item-x">並非所有怪物都有惡意，也有部分怪物會因玩家的陣營持不同的態度。</li>
+<li class="kaj-item-x">喜歡羣體出動的怪物有豺狼（jackal），螞蟻（ant），蜜蜂（bee），網格蟲（grid bug），有角四足獸（rother）。</li>
+<li class="kaj-item-x">有過屍體的地方，易生地衣怪（lichen）和眞菌怪（fungus）。</li>
+<li class="kaj-item-x">不論是何種族，玩家殺害本來對玩家友好的（peaceful）類人生物，一般都算作謀殺。即使守衛主動攻擊，殺害它們也算謀殺。</li>
+<li class="kaj-item-x">將怪物馴服爲寵物的食物包括蛋（egg），內臟（tripe ration），乳酪（cheese），胡蘿蔔（carrot），蘋果（apple），香蕉（banana），屍體（corpse）……直接將食物扔給對胃口的怪物就行了。</li>
+<li class="kaj-item-x">有一家賣蠟燭的商店是爲了紀念一位已逝的<sp></sp>NetHack<sp></sp>創始人而添加的……</li>
+</ul>
+</section>
+<section id="kaj-section-2-5" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">關於物品</a></h2>
+<ul>
+<li class="kaj-item-x">將物品擺放在任意陣營的祭壇上，可得知其<sp></sp>BUC<sp></sp>狀態，<span id="kaj-anchor-def-BUC" class="kaj-anchor-def"></span>即該三種狀態之一：受祝福的（blessed），一般的（uncursed），受詛咒的（cursed）。</li>
+<li class="kaj-item-x">非死靈類型的寵物不願意在受詛咒的物品上停留；死靈類型的寵物則相反，會討厭受祝福的物品。</li>
+<li class="kaj-item-x">物品被浸泡在聖水中就能解除詛咒，且不會沾溼。</li>
+<li class="kaj-item-x">油可用於修復吱吱作響的地板。</li>
+<li class="kaj-item-x">在商店中放下物品便可售出，不過也得看店主是否感興趣。千萬不要用拋的，店主會當作玩家放棄物品所有權……</li>
+<li class="kaj-item-x">商店不會進新貨。（因爲玩家命太短？）</li>
+<li class="kaj-item-x">鞭子（whip）用途甚廣，可用來抽走怪物手上的武器，可用來捲住其它東西拉自己出坑，可……</li>
+</ul>
+</section>
+<section id="kaj-section-2-6" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">關於技能</a></h2>
+<ul>
+<li class="kaj-item-x">施放魔法不但會消耗魔力，還會增加不少饑餓度。</li>
+<li class="kaj-item-x"><kbd>#untrap</kbd><sp></sp>命令除了可用來解除陷阱，還可用於將掉進坑裡的寵物拉出來。</li>
+</ul>
+</section>
+<section id="kaj-section-2-7" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">關於陣營</a></h2>
+<ul>
+<li class="kaj-item-x">玩家所屬神明的陣營共有三種：秩序（lawful），中立（neutral），混沌（chaotic）。</li>
+<li class="kaj-item-x">祈禱，獻祭，捐贈，榮譽，手段，是影響虔誠度的主要因素。</li>
+<li class="kaj-item-x">在其它陣營的祭壇上鑑定物品的<sp></sp><a class="kaj-link-internal" href="#kaj-anchor-def-BUC">BUC<sp></sp>狀態</a>對虔誠度不會有影響。</li>
+<li class="kaj-item-x">陣營可通過取悅其它神明改變。</li>
+<li class="kaj-item-x">玩家和怪物之間的陣營異同會影響相互之間的好感度。</li>
+</ul>
+</section>
+<section id="kaj-section-2-8" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">關於職業</a></h2>
+<table>
+<tbody>
+<tr>
+<td>考古學家<br>archeologist</td><td>帶着鎬子和試金石（touchstone），戰鬥能力一般。秩序陣營或中立陣營。</td>
+</tr>
+<tr>
+<td>蠻夷人<br>barbarian</td><td>體格健碩，能抵劇毒，武器優良，可惜對魔法一竅不通。中立陣營或混沌陣營。</td>
+</tr>
+<tr>
+<td>穴居人<br>caveman</td><td>比蠻夷人弱一些，裝備原始，不知同類相食是何物，什麼都吃。秩序陣營或中立陣營。</td>
+</tr>
+<tr>
+<td>治療師<br>healer</td><td>會魔法的醫生，擁有急救裝備，具急救技能，身體羸弱卻抗毒。中立陣營。</td>
+</tr>
+<tr>
+<td>騎士<br>knight</td><td>裝備優良，擁有一坐騎，能遠距離跳躍。一切行爲須遵循騎士守則。正義陣營。</td>
+</tr>
+<tr>
+<td>武僧<br>monk</td><td>素食主義者，葷食令其作嘔。具備徒手作戰能力。各種陣營。</td>
+</tr>
+<tr>
+<td>祭師<br>priest</td><td>懂得如何鑑定物品的<sp></sp><a class="kaj-link-internal" href="#kaj-anchor-def-BUC">BUC<sp></sp>狀態</a>，有魔法專長。各種陣營。</td>
+</tr>
+<tr>
+<td>遊俠<br>ranger</td><td>精通遠程武器，搜索能力強。中立陣營或混沌陣營。</td>
+</tr>
+<tr>
+<td>盜賊<br>rogue</td><td>撬鎖，擲飛刀，濳行，偷襲，解除陷阱，樣樣精通。混沌陣營。</td>
+</tr>
+<tr>
+<td>日本武士<br>samurai</td><td>遠戰近戰兼是好手，徒手格鬥能力比武僧弱一些，要遵循日本武士道。秩序陣營。</td>
+</tr>
+<tr>
+<td>遊客<br>tourist</td><td>帶着照相機到地下城觀光的有錢人……中立陣營。</td>
+</tr>
+<tr>
+<td>女武神<br>valkyrie</td><td>原型爲北歐神話中奧汀神的十二婢女之一。體格健壯不怕冷，近戰無敵，遠戰一般。秩序陣營或中立陣營。</td>
+</tr>
+<tr>
+<td>巫師<br>wizard</td><td>擁有強大的魔法力量，然身體素質堪懮。中立陣營或混沌陣營。</td>
+</tr>
+<tr>
+<td>火焰術士<br>flame mage</td><td>類似巫師，專精火系魔法的術士。抗火，不擅長冰系魔法，寵物爲地獄獵犬幼崽。各種陣營。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td>寒冰術士<br>ice mage</td><td>類似巫師，專精冰系魔法的術士。抗寒，不擅長火系魔法，寵物爲冬狼幼崽。各種陣營。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td>死靈術士<br>necromancer</td><td>類似巫師，專精死靈魔法的術士。能鑑定物品的<sp></sp><a class="kaj-link-internal" href="#kaj-anchor-def-BUC">BUC<sp></sp>狀態</a>，寵物爲食屍鬼。混沌陣營。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td>死靈殺手<br>undead slayer</td><td>專職擊殺死靈類型怪物，對該類怪物有震攝力，能抵抗經驗値竊取。各種陣營。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td>皇家衛士<br>yeoman</td><td>擅使長槍，馬術高明，步速稍慢，懂得安撫騎獸。秩序陣營。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="kaj-section-2-9" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">關於種族</a></h2>
+<table>
+<tbody>
+<tr>
+<td>人類<br>human</td><td>地面世界的主要族羣。是最平凡、最平衡的種族，適合各種職業。它們沒有任何天生的特殊技能，尤其是沒有紅外線視覺，這使得它們在黑暗的地下城戰鬥中相當不利。</td>
+</tr>
+<tr>
+<td>精靈<br>elf</td><td>它們不單身手敏捷，移動迅速，感覺靈敏（具紅外線視覺），而且智力超羣，擁有較爲高超的鑄造工藝，能生產非常優秀的裝備。</td>
+</tr>
+<tr>
+<td>侏儒<br>drawf</td><td>雖然比人類和精靈矮小，但身體結實強壯。善於採礦和冶金，並擁有紅外線視覺。聽說侏儒護甲的質量是第二好的，僅次於精靈族的祕銀（mithril）護甲。</td>
+</tr>
+<tr>
+<td>地精<br>gnome</td><td>地精和侏儒相似，但身材更矮小，擁有紅外線視覺。它們都是採礦專家，一般的試金石在它們手中會受到祝福。它們的智力也很高，傳說在地下城的某處隱藏着它們建造的複雜地下礦洞，那裡充滿着財富與危險。</td>
+</tr>
+<tr>
+<td>獸人<br>orc</td><td>野蠻成性的種族。它們力量驚人，身體能抗百毒，具有紅外線視覺。可是，它們智力較低，製作的裝備質量較差，對精靈無比嫉妒和憎恨。</td>
+</tr>
+<tr>
+<td>變形人<br>doppelganger</td><td>身體素質相當好，可通過<sp></sp><kbd>#youpoly</kbd><sp></sp>命令變身爲多種怪物。未變形之前和人類差不多，但不管什麼時候食類人生物都會被當作是殘食同類。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td>暗精靈<br>drow</td><td>精靈族的一種。膚色較暗淡，喜歡在地下生活，擁有紅外線視覺。它們的雙手可令怪物沉睡。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td>穴居矮人<br>hobbit</td><td>回復力較強，適合使用武器和魔法，行動非常靈活迅速，有紅外線視覺。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td>狼人<br>lycanthrope</td><td>具有撕裂敵人的強力，強大的恢復能力；不怕經驗竊取；能變身爲狼人並召喚同伴，但不善於魔法。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td>吸血鬼<br>vampire</td><td>身體素質極高，再生恢復能力超強，抗經驗竊取。平時處於懸空飛行狀態，不須呼吸空氣。其吸咬可對怪物造成衰弱效果，並以吸取鮮血爲惟一營養補充方式，因此它們註定是戰鬥種族。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+<div id="kaj-section-3" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">遊戲操作</a></h1>
+<p>雖然有點囉唆，但還是稍微介紹一下吧。</p>
+<section id="kaj-section-3-1" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">統計數據</a></h2>
+<p>遊戲畫面（純文字界面）最下方顯示了玩家的相關信息，大致如下：</p>
+<div class="kaj-indented">
+<pre class="lang-no-code">
+Player the Rambler     St:12 Dx:7 Co:18 In:11 Wi:9 Ch:15  Neutral
+Dlvl:1 $:0  HP:9(12) Pw:3(3) AC:10 Exp:1/19 T:257 Weak
+</pre>
+</div>
+<p>左上角的是玩家角色名稱，如「Player」，及職業等級對應的稱號，如「the Rambler」。右上角爲玩家所屬陣營，如「Neutral」。右下角會臨時顯示各種不良狀態（的縮略詞），如「Week」。</p>
+<p>可通過統計欄獲悉的不良狀態包括：</p>
+<div class="kaj-indented">
+<table>
+<tbody>
+<tr>
+<td>不良飲食狀態</td><td>吃撐（Oversatiated），饑餓（Hungry），虛弱（Weak），昏迷（Fainted），絕食（starved）。</td>
+</tr>
+<tr>
+<td>不良負重狀態</td><td>稍重（Burdened），很重（Stressed），極重（Strained），過重（Overtaxed），超載（Overloaded）。</td>
+</tr>
+<tr>
+<td>其它不良狀態</td><td>失明（Blind），眩暈（Stunned），迷惑（Confused），產生幻覺（Hallucinated），生病（Ill），食物中毒（Food Poisoned），黏液化（Slimed）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其餘數據的含義分列如下：</p>
+<div class="kaj-indented">
+<table>
+<tbody>
+<tr>
+<td>地城層數<br>Dungeon Level, Dlvl</td><td>該數字會隨着所在層數而增減，不過在某些地方會改用地下城的名稱表示。</td>
+</tr>
+<tr>
+<td>金錢額度<br>Gold, $</td><td>表示玩家身上的金子等價於多少<sp></sp>zorkmid，zorkmid<sp></sp>是地下城的統一貨幣單位。</td>
+</tr>
+<tr>
+<td>抗打擊値<br>Hit Point, HP</td><td>俗稱生命値。會緩慢恢復，也可通過飲食補充。其上限値可變。當其値減少至零時，玩家便死亡。</td>
+</tr>
+<tr>
+<td>魔力値<br>Power, Pw</td><td>或稱精神力。會緩慢恢復，也可通過飲食補充。其上限値可變。施放魔法時必須有足夠的魔力。</td>
+</tr>
+<tr>
+<td>護甲等級<br>Armor Class, AC</td><td>俗稱防禦力。其値愈低，玩家受到的傷害愈少。可通過更改裝備改變。</td>
+</tr>
+<tr>
+<td>經驗<br>Experience, Exp</td><td>爲具體的經驗値或玩家等級。</td>
+</tr>
+<tr>
+<td>力量値<br>Strengh, St</td><td>主要影響負重能力、攻擊強度、投射範圍。</td>
+</tr>
+<tr>
+<td>靈活度<br>Dexterity, Dx</td><td>主要影響每個回合的行動次數和攻擊命中率。</td>
+</tr>
+<tr>
+<td>體質<br>Constitution, Co</td><td>主要影響負重能力、療癒速度、HP<sp></sp>上限。</td>
+</tr>
+<tr>
+<td>理解能力<br>Intelligence, In</td><td>主要影響魔法學習能力、魔法強度、施法成功率。</td>
+</tr>
+<tr>
+<td>智慧<br>Wisdom, Wi</td><td>主要影響魔力的恢復速度，魔力値上限，以及治療師、騎士、武僧、女武神的施法。</td>
+</tr>
+<tr>
+<td>魅力<br>Charisma, Ch</td><td>主要影響交易價格和怪物對玩家的好感度。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="kaj-section-3-2" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">符號解釋</a></h2>
+<p>ASCII<sp></sp>界面的地圖上有好多古靈精怪的符號呢，是不是看得眼花啦？那就說明你的想象力還不夠，得多多腦補！反正玩久了就會熟悉一切的～</p>
+<div class="kaj-indented">
+<table>
+<caption>生物符號</caption>
+<tbody>
+<tr>
+<td><code>□</code></td><td>空格表示隱形或無形的生物。</td>
+</tr>
+<tr>
+<td><code>@</code></td><td>玩家本身，人類，或類人生物。</td>
+</tr>
+<tr>
+<td><code>]</code></td><td>可疑的物體……</td>
+</tr>
+<tr>
+<td><code>I</code></td><td>表示無法看見的（<b>i</b>nvisible）生物曾經出現過的位置。</td>
+</tr>
+<tr>
+<td><code>…</code></td><td>幾乎所有英文字母（a-zA-Z），還有幾種標點符號<sp></sp><code>&#39;:;&amp;~</code>，用於表示各種怪物。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>地形符號</caption>
+<tbody>
+<tr>
+<td><code>□</code></td><td>空格表示空氣或昏暗之處。</td>
+</tr>
+<tr>
+<td><code>.</code></td><td>地面或冰面，通常是房間的地面。</td>
+</tr>
+<tr>
+<td><code>#</code></td><td>通道，水槽，鉄柵欄，雲，竈臺，或者樹木。</td>
+</tr>
+<tr>
+<td><code>+</code></td><td>關着的門。</td>
+</tr>
+<tr>
+<td><code>-</code></td><td>墻壁，或者被打開的門。</td>
+</tr>
+<tr>
+<td><code>|</code></td><td>墻壁，墳墓，或者被打開的門。</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td><td>通向上一層的通道。</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td><td>通向下一層的通道。</td>
+</tr>
+<tr>
+<td><code>{</code></td><td>噴泉或噴水池。</td>
+</tr>
+<tr>
+<td><code>^</code></td><td>陷阱或地上的坑洞。</td>
+</tr>
+<tr>
+<td><code>_</code></td><td>祭壇。</td>
+</tr>
+<tr>
+<td><code>\</code></td><td>王座。</td>
+</tr>
+<tr>
+<td><code>}</code></td><td>水或巖漿。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>物品符號</caption>
+<tbody>
+<tr>
+<td><code>$</code></td><td>錢或金子。</td>
+</tr>
+<tr>
+<td><code>%</code></td><td>食物。</td>
+</tr>
+<tr>
+<td><code>*</code></td><td>小石頭或（假的）寶石。</td>
+</tr>
+<tr>
+<td><code>`</code></td><td>巨石或雕像。</td>
+</tr>
+<tr>
+<td><code>?</code></td><td>卷軸。</td>
+</tr>
+<tr>
+<td><code>+</code></td><td>魔法書。</td>
+</tr>
+<tr>
+<td><code>!</code></td><td>藥水。</td>
+</tr>
+<tr>
+<td><code>&quot;</code></td><td>護身符。</td>
+</tr>
+<tr>
+<td><code>=</code></td><td>戒指。</td>
+</tr>
+<tr>
+<td><code>[</code></td><td>衣服或盔甲。</td>
+</tr>
+<tr>
+<td><code>)</code></td><td>武器。</td>
+</tr>
+<tr>
+<td><code>(</code></td><td>工具。</td>
+</tr>
+<tr>
+<td><code>/</code></td><td>棍杖。</td>
+</tr>
+<tr>
+<td><code>0_</code></td><td>帶着鎖鏈的鉄球。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="kaj-section-3-3" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">按鍵說明</a></h2>
+<p>遊戲會將提示的可選按鍵置於方括號中。例如<sp></sp><kbd>[ynq]</kbd>，根據情景，<kbd>y</kbd><sp></sp>可能表示【是（yes）】，<kbd>n</kbd><sp></sp>可能是【否（no）】，<kbd>q</kbd><sp></sp>表示【取消（quit）】。</p>
+<p>在提示挑選物品的按鍵時，<kbd>-</kbd><sp></sp>表示手指，或用於連接兩個符號表示某一範圍內的所有按鍵；<kbd>?</kbd><sp></sp>表示按常理來說比較合適的物品；<kbd>*</kbd><sp></sp>表示任意物品（除了手指）。例如，<kbd>[- a-c or ?*]</kbd><sp></sp>表示【手指】，【物品<sp></sp><span class="kaj-inline-literal">a/b/c</span>】，或者（or）【合適的物品的詳細列表】，或【所有物品的詳細列表】。</p>
+<p>輸入某個數字<sp></sp>N<sp></sp>再按下動作按鍵，可重覆該動作<sp></sp>N<sp></sp>次。如，<kbd>20s</kbd><sp></sp>表示連續搜索至多<sp></sp>20<sp></sp>回合，<kbd>100.</kbd><sp></sp>表示原地休息<sp></sp>100<sp></sp>回合。假如使用數字小鍵盤來移動角色的話，得在開頭加上按鍵 <kbd>n</kbd>，如<sp></sp><kbd>n20s</kbd><sp></sp>或<sp></sp><kbd>n100.</kbd>。</p>
+<p>PC<sp></sp>上不使用數字小鍵盤（number pad）時的大部分按鍵的說明在下方。我會以類以<sp></sp><kbd>[ynq]</kbd><sp></sp>的形式表示多個可選按鍵中的任一個，並用<sp></sp><code>^</code><sp></sp>後接字母表示<sp></sp><kbd>CTRL</kbd><sp></sp>鍵和小寫字母鍵的組合，如<sp></sp><kbd>^D</kbd><sp></sp>爲同時按下<sp></sp><kbd>CTRL</kbd><sp></sp>和<sp></sp><kbd>d</kbd>。</p>
+<p>八個水平方向鍵：<kbd>[yuhjklbn]</kbd></p>
+<div class="kaj-indented">
+<pre class="lang-no-code">
+y k u  注意：無法斜着進入門口。
+ \|/
+h-.-l  更複雜的移動方式，如持續移動並且不撿
+ /|\   東西，或一直到分岔路口爲止，請按<sp></sp>?
+b j n  鍵瞭解更多按鍵組合。
+
+若堅持要移動到怪物的位置，便表明要近身攻擊。
+</pre>
+</div>
+<p>其它按鍵：</p>
+<div class="kaj-indented">
+<table>
+<tbody>
+<tr>
+<td><kbd>ESC</kbd></td><td>取消動作，或在顯示<sp></sp><code>--More--</code><sp></sp>時翻頁。</td>
+</tr>
+<tr>
+<td><kbd>□</kbd></td><td>空格（space），取消動作或翻頁。假如開啓了<sp></sp><code>rest_on_space</code><sp></sp>功能，還能原地休息一回合。</td>
+</tr>
+<tr>
+<td><kbd>?</kbd></td><td>打開遊戲幫助清單。</td>
+</tr>
+<tr>
+<td><kbd>O</kbd></td><td>打開遊戲配置（<b>o</b>ption）清單。</td>
+</tr>
+<tr>
+<td><kbd>&amp;</kbd></td><td>接着按下某個按鍵可查看其用途說明。</td>
+</tr>
+<tr>
+<td><kbd>;</kbd></td><td>接着將遊標移動到地圖上某個符號再按下<sp></sp><kbd>[.,;:]</kbd><sp></sp>便可查看其相關資料。</td>
+</tr>
+<tr>
+<td><kbd>/</kbd></td><td>接着鍵入<sp></sp><kbd>n</kbd><sp></sp>可輸入某個關鍵詞以查詢和遊戲世界相關的資料；若是接着鍵入<sp></sp><kbd>y</kbd><sp></sp>便可將遊標移動到地圖上某個符號再按下<sp></sp><kbd>[.,;:]</kbd><sp></sp>查看其相關資料。</td>
+</tr>
+<tr>
+<td><kbd>.</kbd></td><td>原地不動或休息一回合。</td>
+</tr>
+<tr>
+<td><kbd>&lt;</kbd></td><td>垂直向上移動。</td>
+</tr>
+<tr>
+<td><kbd>&gt;</kbd></td><td>垂直向下移動。</td>
+</tr>
+<tr>
+<td><kbd>:</kbd></td><td>查看腳下的物品。</td>
+</tr>
+<tr>
+<td><kbd>,</kbd></td><td>撿起腳下的物品。</td>
+</tr>
+<tr>
+<td><kbd>a</kbd></td><td>使用（<b>a</b>pply）工具。</td>
+</tr>
+<tr>
+<td><kbd>A</kbd></td><td>卸下身上所有護甲（<b>a</b>rmor）。</td>
+</tr>
+<tr>
+<td><kbd>^A</kbd></td><td>重覆（<b>a</b>gain）上一個動作。</td>
+</tr>
+<tr>
+<td><kbd>c</kbd></td><td>關閉（<b>c</b>lose）門口。</td>
+</tr>
+<tr>
+<td><kbd>C</kbd></td><td>給怪物起個名字（<b>c</b>all）。</td>
+</tr>
+<tr>
+<td><kbd>^C</kbd></td><td>強行退出（<b>c</b>rash）遊戲（若<sp></sp><code>ignintr</code><sp></sp>功能未啓用）。</td>
+</tr>
+<tr>
+<td><kbd>d</kbd></td><td>放下（<b>d</b>rop）身上的物品）。</td>
+</tr>
+<tr>
+<td><kbd>D</kbd></td><td>放下身上的某類物品。</td>
+</tr>
+<tr>
+<td><kbd>^D</kbd></td><td>往某個方向開踼。通常是踼門（<b>d</b>oor）。</td>
+</tr>
+<tr>
+<td><kbd>e</kbd></td><td>吃（<b>e</b>at）地上或身上的食物。</td>
+</tr>
+<tr>
+<td><kbd>E</kbd></td><td>往地上刻字（<b>e</b>ngrave）。</td>
+</tr>
+<tr>
+<td><kbd>f</kbd></td><td>往某個方向投射（<b>f</b>ire）身上裝載好的投射性武器。</td>
+</tr>
+<tr>
+<td><kbd>F</kbd></td><td>往某個方向強行攻擊（<b>f</b>ight），不論有沒有目標。</td>
+</tr>
+<tr>
+<td><kbd>i</kbd></td><td>查看身上的物品（<b>i</b>tem）。</td>
+</tr>
+<tr>
+<td><kbd>I</kbd></td><td>查看身上的某類物品。</td>
+</tr>
+<tr>
+<td><kbd>o</kbd></td><td>打開（<b>o</b>pen）門口。</td>
+</tr>
+<tr>
+<td><kbd>p</kbd></td><td>向店主付錢（<b>p</b>ay）。</td>
+</tr>
+<tr>
+<td><kbd>P</kbd></td><td>戴上（<b>p</b>ut on）戒指、護身符或其它小飾物。</td>
+</tr>
+<tr>
+<td><kbd>^P</kbd></td><td>翻看之前（<b>p</b>revious）出現過的提示信息。</td>
+</tr>
+<tr>
+<td><kbd>q</kbd></td><td>飲用（<b>q</b>uaff）液體。</td>
+</tr>
+<tr>
+<td><kbd>Q</kbd></td><td>裝載投射性武器至箭筒（<b>q</b>uiver）或槍械。</td>
+</tr>
+<tr>
+<td><kbd>r</kbd></td><td>閱讀（<b>r</b>ead）卷軸或書籍。</td>
+</tr>
+<tr>
+<td><kbd>R</kbd></td><td>卸下（<b>r</b>emove）戒指、護身符或其它小飾物。</td>
+</tr>
+<tr>
+<td><kbd>^R</kbd></td><td>重新繪製（<b>r</b>epaint）遊戲畫面。</td>
+</tr>
+<tr>
+<td><kbd>s</kbd></td><td>搜索周圍一回合。</td>
+</tr>
+<tr>
+<td><kbd>S</kbd></td><td>保存（<b>s</b>ave）當前進度並退出遊戲，下次可用相同玩家名稱繼續遊戲。</td>
+</tr>
+<tr>
+<td><kbd>t</kbd></td><td>投擲（<b>t</b>hrow）物品或射擊。</td>
+</tr>
+<tr>
+<td><kbd>T</kbd></td><td>脫掉（<b>t</b>ake off）一件衣服或盔甲。</td>
+</tr>
+<tr>
+<td><kbd>^T</kbd></td><td>超空間瞬間移動（<b>t</b>eleport），假如你能主動發動這個能力的話。</td>
+</tr>
+<tr>
+<td><kbd>v</kbd></td><td>查看遊戲的版本（<b>v</b>ersion）信息。</td>
+</tr>
+<tr>
+<td><kbd>V</kbd></td><td>顯示冗長的（<b>v</b>erbose）遊戲開發歴史。</td>
+</tr>
+<tr>
+<td><kbd>w</kbd></td><td>持帶（<b>w</b>ield）武器或赤手空拳。</td>
+</tr>
+<tr>
+<td><kbd>W</kbd></td><td>穿戴（<b>w</b>ear）衣服或盔甲。</td>
+</tr>
+<tr>
+<td><kbd>x</kbd></td><td>切換（e<b>x</b>change）主武器（正在使用的武器）和副武器（在另一隻手上）。</td>
+</tr>
+<tr>
+<td><kbd>X</kbd></td><td>進入探索（e<b>x</b>plore）模式，即調試模式，並取消當前遊戲的高分榜排名紀錄。</td>
+</tr>
+<tr>
+<td><kbd>^X</kbd></td><td>顯示玩家的名稱、性別、種族、陣營祀奉的神明。</td>
+</tr>
+<tr>
+<td><kbd>z</kbd></td><td>施放（<b>z</b>ap）魔法杖中蘊藏的魔法能量。</td>
+</tr>
+<tr>
+<td><kbd>Z</kbd></td><td>施放（<b>z</b>ap）自身所學魔法。</td>
+</tr>
+<tr>
+<td><kbd>^Z</kbd></td><td>將遊戲暫停並置於操作系統後臺作業。（*NIX<sp></sp>系統專用）</td>
+</tr>
+<tr>
+<td><kbd>!</kbd></td><td>切換至命令行（shell）。</td>
+</tr>
+<tr>
+<td><kbd>@</kbd></td><td>快速開啓或關閉智能撿拾<sp></sp><code>autopickup</code><sp></sp>功能。</td>
+</tr>
+<tr>
+<td><kbd>^</kbd></td><td>查看某陷阱的類型。</td>
+</tr>
+<tr>
+<td><kbd>)</kbd></td><td>查看玩家正在使用的武器。</td>
+</tr>
+<tr>
+<td><kbd>[</kbd></td><td>查看玩家正在使用的衣服或盔甲。</td>
+</tr>
+<tr>
+<td><kbd>=</kbd></td><td>查看玩家正在使用的戒指。</td>
+</tr>
+<tr>
+<td><kbd>&quot;</kbd></td><td>查看玩家正在使用的護身符。</td>
+</tr>
+<tr>
+<td><kbd>(</kbd></td><td>查看玩家正在使用的工具。</td>
+</tr>
+<tr>
+<td><kbd>*</kbd></td><td>查看玩家正在使用的所有物品。</td>
+</tr>
+<tr>
+<td><kbd>$</kbd></td><td>查看玩家身上有多少金錢。</td>
+</tr>
+<tr>
+<td><kbd>+</kbd></td><td>查看玩家學會的魔法。</td>
+</tr>
+<tr>
+<td><kbd>\</kbd></td><td>查看玩家已經瞭解過的物品。</td>
+</tr>
+<tr>
+<td><kbd>#</kbd></td><td>輸入擴展動作命令。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>擴展動作命令</caption>
+<tbody>
+<tr>
+<td><kbd>#?</kbd></td><td>查看所有可用的擴展命令。</td>
+</tr>
+<tr>
+<td><kbd>#adjust</kbd></td><td>修改物品對應的按鍵。</td>
+</tr>
+<tr>
+<td><kbd>#chat</kbd></td><td>和某生物談話。</td>
+</tr>
+<tr>
+<td><kbd>#conduct</kbd></td><td>查看玩家已經達成的成就。</td>
+</tr>
+<tr>
+<td><kbd>#dip</kbd></td><td>將東西浸泡到某液體中。</td>
+</tr>
+<tr>
+<td><kbd>#enhance</kbd></td><td>查看或提升技能熟練度。</td>
+</tr>
+<tr>
+<td><kbd>#force</kbd></td><td>用尖銳物撬鎖。</td>
+</tr>
+<tr>
+<td><kbd>#invoke</kbd></td><td>引導出物碞的特殊能量。</td>
+</tr>
+<tr>
+<td><kbd>#jump</kbd></td><td>遠距離跳躍。</td>
+</tr>
+<tr>
+<td><kbd>#loot</kbd></td><td>搜刮腳下的箱子或袋子，或坐騎的馬鞍。</td>
+</tr>
+<tr>
+<td><kbd>#monster</kbd></td><td>當玩家爲怪物形態時使用相關技能。</td>
+</tr>
+<tr>
+<td><kbd>#name</kbd></td><td>爲物品命名。</td>
+</tr>
+<tr>
+<td><kbd>#offer</kbd></td><td>獻祭東西給神明。一般用屍體做祭品。</td>
+</tr>
+<tr>
+<td><kbd>#pray</kbd></td><td>祈求神明的祐助。</td>
+</tr>
+<tr>
+<td><kbd>#quit</kbd></td><td>不存檔而正常退出遊戲。</td>
+</tr>
+<tr>
+<td><kbd>#ride</kbd></td><td>登上或跳下坐騎。</td>
+</tr>
+<tr>
+<td><kbd>#rub</kbd></td><td>用手摩擦東西。</td>
+</tr>
+<tr>
+<td><kbd>#sit</kbd></td><td>原地坐下。</td>
+</tr>
+<tr>
+<td><kbd>#turn</kbd></td><td>將屍體轉化爲死靈類型的生物。</td>
+</tr>
+<tr>
+<td><kbd>#twoweapon</kbd></td><td>切換至雙手各持主武器模式，或取消該模式。</td>
+</tr>
+<tr>
+<td><kbd>#untrap</kbd></td><td>解除陷阱，或檢查周圍是否有陷阱並嘗試將其解除，或嘗試將坑中的寵物拉上來。</td>
+</tr>
+<tr>
+<td><kbd>#version</kbd></td><td>查看遊戲在編譯時的相關配置。</td>
+</tr>
+<tr>
+<td><kbd>#wipe</kbd></td><td>用手把臉擦乾淨。</td>
+</tr>
+<tr>
+<td><kbd>#borrow</kbd></td><td>從怪物身上借走或偷走金錢。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td><kbd>#technique</kbd></td><td>使用職業特技。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td><kbd>#vanquished</kbd></td><td>查看已經被擊殺的怪物，不一定是玩家擊殺的。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+<tr>
+<td><kbd>#youpoly</kbd></td><td>變形。（SLASH&#39;EM<sp></sp>特有）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>最後，送你一張來自<sp></sp><a class="kaj-link-external" href="http://www.nethackwiki.com">nethackwiki.com</a><sp></sp>的<sp></sp>NetHack<sp></sp><a class="kaj-link-external" href="http://nethackwiki.com/wiki/File:Keyboard_shortcuts.svg">按鍵分佈圖</a>吧～</p>
+<figure class="kaj-image-png center bg-light">
+<img alt="Nethack按鍵分佈圖。" src="/test/upload/NethackKeyboard.png">
+</figure>
+</section>
+</div>
+<footer>
+<table class="kaj-cite-def" id="kaj-cite-def-%E7%9B%B8%E9%97%9C%E9%80%A3%E7%B5%90">
+<tr>
+<td class="kaj-label">[相關連結]</td>
+<td>
+<div class="kaj-line-block">
+<div class="kaj-line"><a class="kaj-link-external kaj-link-raw" href="NetHackWiki">NetHackWiki</a>——NetHack<sp></sp>的公開<sp></sp>Wiki<sp></sp>站點。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://nethack.wikia.com">Wikihack</a>——NetHack<sp></sp>與<sp></sp>SLASH&#39;EM<sp></sp>的英文<sp></sp>Wiki<sp></sp>站點。</div>
+<div class="kaj-line">Dudley&#39;s Dungeon <a class="kaj-link-external" href="http://www.nicolaas.net/dudley/">舊</a> <a class="kaj-link-external" href="http://alt.org/nethack/dudley/">新</a> <a class="kaj-link-external" href="http://sadowl.com/dudley/">綜</a>——地城歴險小漫畫。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://bilious.alt.org">NetHack Patch Database</a>——NetHack<sp></sp>遊戲源代碼補丁倉庫。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://l.j-factor.com/nethack/">NetHack patches</a>——一個合並了多個補丁的<sp></sp>NetHack<sp></sp>源代碼大補丁。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://bilious.alt.org/~paxed/nethack/nhsshot/tileimgmap.php">NetHack tileset imagemap</a>——NetHack<sp></sp>界面包下載站點。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://bilious.alt.org/~paxed/nethack/nhsshot/">NetHack tileset screenshot</a>——NetHack<sp></sp>界面包在線預覽工具。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="https://zh.wikipedia.org/zh/D20%25E8%25A6%258F%25E5%2589%2587">D20<sp></sp>規則</a>——很多<sp></sp>Roguelike<sp></sp>遊戲都借鑑過的免費<sp></sp>D&amp;D<sp></sp>規則。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://ipenburg.home.xs4all.nl/dds/touristg.htm">遊客職業的來歴</a>——呵，你會瞭解到一些有趣的小說和電影的。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://www.videogamez.biz/griefed/">Nethack: A Tale of Getting Griefed</a>——發生在<sp></sp>NAO<sp></sp>中的一個被坑傳說。（劇透愼入）</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://pre-sence.com/archives/roguelike-dossier">Roguelike<sp></sp>到底是啥？</a>——這篇文章很長……</div>
+</div>
+</td>
+</tr>
+</table>
+<table class="kaj-cite-def" id="kaj-cite-def-%E9%A1%9E%E4%BC%BC%E9%81%8A%E6%88%B2">
+<tr>
+<td class="kaj-label">[類似遊戲]</td>
+<td>
+<div class="kaj-line-block">
+<div class="kaj-line"><a class="kaj-link-external" href="http://www.spiderwebsoftware.com">Spiderweb Software</a>——一系列一西方奇幻風格的冒險遊戲。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://zh.wikipedia.org/wiki/%25E5%258D%259A%25E5%25BE%25B7%25E4%25B9%258B%25E9%2597%25A8%25E7%25B3%25BB%25E5%2588%2597">Baldur&#39;s Gate</a>——博德之門系列。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://cn.cataclysmdda.com">Cataclysm: Dark Days Ahead</a>——帶有科幻氣息的末日喪屍圍城生存遊戲。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://www.unrealworld.fi">UnReal World</a>——在鉄器時代晚期的虛幻世界中努力生存吧。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://www.adom.de">Ancient Domains Of Mystery</a>——經典<sp></sp>Roguelike<sp></sp>遊戲之一，具有仿《指環王》的世界設定。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://angband.oook.cz">Angband</a>——經典<sp></sp>Roguelike<sp></sp>遊戲之一，其衍生版本相當多。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://crawl.develz.org/wordpress/">Dungeon Crawl Stone Soup</a>——經典<sp></sp>Roguelike<sp></sp>遊戲之一。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://homepage3.nifty.com/rfish/index_e.html">Elona</a>——具有多分支任務的優秀<sp></sp>Roguelike<sp></sp>遊戲。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://te4.org">ToME4</a>——Maj&#39;Eyal<sp></sp>的傳說。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://www.bay12games.com/dwarves/">Dwarf Fortress</a>——建造你的矮人要塞不是問題。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://www.zincland.com/powder/">POWDER</a>——或許是一個經典的<sp></sp>Roguelike<sp></sp>遊戲？</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://us.blizzard.com/en-us/games/d2/">Diablo2</a>——暗黑破壞神Ⅱ是個難忘的<sp></sp>ARPG<sp></sp>遊戲。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://www.elderscrolls.com">The Elder Scrolls</a>——上古卷軸系列。</div>
+<div class="kaj-line"><a class="kaj-link-external" href="https://play.google.com/store/apps/details?id=com.watabou.pixeldungeon">Pixel Dungeon</a>——像素地下城。</div>
+</div>
+</td>
+</tr>
+</table>
+<table class="kaj-cite-def" id="kaj-cite-def-%E4%B8%8B%E8%BC%89%E8%B3%87%E6%BA%90">
+<tr>
+<td class="kaj-label">[下載資源]</td>
+<td>
+<div class="kaj-line-block">
+<div class="kaj-line"><a class="kaj-link-external" href="http://www.thegreatestgameyouwilleverplay.com">各平臺上的<sp></sp>NetHack 遊戲匯總</a></div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://tieba.baidu.com/p/2421099842">NetHack 的<sp></sp>Windows 版（帶圖像界面且是中文版）</a></div>
+<div class="kaj-line"><a class="kaj-link-external" href="http://ge.tt/api/1/files/3iofnRp/0/blob?download">NetHack 的<sp></sp>Windows 版（帶圖像界面且加入了聲效）</a></div>
+<div class="kaj-line"><a class="kaj-link-external" href="https://github.com/coolwanglu/BrowserHack">BrowserHack</a>——NetHack<sp></sp>的單機網頁版。</div>
+</div>
+</td>
+</tr>
+</table>
+</footer></article>
+    <div class="meta">
+      
+<div class="license">
+  
+  <div>該文寫於 2015 年 05 月 15 日</div>
+  <div>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">創用 CC BY-NC-SA 4.0 授權 © 2015</a>
+    <a rel="author" href="/test/pages/about/">J.W</a>
+  </div>
+  
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+    
+  </body>
+
+</html>

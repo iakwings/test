@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Cache-Control" content="no-siteapp"><!-- Damn Baidu -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script>//html5.addElements('my tags')</script>
+    <![endif]-->
+
+    <title>小說 LOUDS - 囚</title>
+
+    <meta name="robots" content="nofollow">
+    <link rel="icon" size="48x48" href="/test/favicon.ico">
+    <link rel="icon" size="240x240" type="image/png" href="/test/favicon240.png">
+    <link rel="icon" size="any" type="image/svg+xml" href="/test/favicon.svg">
+
+    
+  
+    <link rel="stylesheet" href="/test/data/css/style.css">
+    
+  <script src="/test/data/js/misc.js"></script>
+
+
+    
+  </head>
+
+  <body>
+    
+
+<div class="ring-force"></div>
+
+<div class="blog-page">
+  <div class="content">
+    <div class="title">
+      <a href="https://iakwings.github.io/test/">小說 LOUDS</a>
+    </div>
+    <article class="text clearfix"><header>
+<p>本文內容彙編自「<a class="kaj-link-external" href="http://d.hatena.ne.jp/takeda25/20120421/1335019644">簡潔データ構造<sp></sp>LOUDS<sp></sp>の解説</a>」。感謝<u>真鍋宏史</u>前輩在學習之餘不忘做笔記。</p>
+</header>
+<div id="kaj-contents">
+<div class="kaj-contents-title">
+<span>目錄</span>
+</div>
+<ul>
+<li>
+<a href="#kaj-section-1">LOUDS<sp></sp>爲何物</a>
+</li>
+<li>
+<a href="#kaj-section-2">生成比特串</a>
+</li>
+<li>
+<a href="#kaj-section-3">LOUDS<sp></sp>索引號</a>
+<ul>
+<li>
+<a href="#kaj-section-3-1">節點號與索引號的互換</a>
+</li>
+<li>
+<a href="#kaj-section-3-2">由子節點索引號得到父節點號</a>
+</li>
+<li>
+<a href="#kaj-section-3-3">由父節點號得到子節點索引號</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#kaj-section-4">實例</a>
+</li>
+</ul>
+</div>
+<div id="kaj-section-1" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">LOUDS<sp></sp>爲何物</a></h1>
+<p>LOUDS<sp></sp>即「Level Order Unary Degree Sequence」，爲表示「樹之各個節點連結」的高效數據結構。不同於傳統的位址表示法，該結構只使用一個個比特位有序地表示各節點間的連結，十分節省空間。</p>
+</div>
+<div id="kaj-section-2" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">生成比特串</a></h1>
+<p>比如說有如下的樹：</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center bg-light">
+<img alt="1 -&gt; { 2, 3, 4 }; 2 -&gt; 5; 4 -&gt; { 6, 7, 8 }; 7 -&gt; 9; 8 -&gt; { 10, 11 };" data-src="/test/upload/20150516_04.png" data-srcset="/test/upload/20150516_04.png 2x, /test/upload/20150516_04-1x.png 1x">
+</figure>
+<!-- ASCII
+         1
+        /|\
+       2 3 4
+      /   /|\
+     5   6 7 8
+          /  |\
+         9  10 11 -->
+</div>
+<p>其各個連結若用<sp></sp>LOUDS<sp></sp>表示，則爲以下比特串（bit-string）：</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="1 0 1 1 1 0 1 0 0 1 1 1 0 0 0 1 0 1 1 0 0 0 0" data-src="/test/upload/20150516_01.png" data-srcset="/test/upload/20150516_01.png 2x, /test/upload/20150516_01-1x.png 1x">
+</figure>
+</div>
+<p>其構造方式相當簡易。只要一邊對該樹進行由上至下、從左往右的層序遍歷，一邊計算所在節點的子節點數便可：</p>
+<div class="kaj-indented">
+<p>1. 有多少個子節點便往已有字串右方添加多少個「1」。</p>
+<p>2. 以一個「0」結束當前節點。</p>
+</div>
+<p>於是之前寫下的比特串可被切分如下，分别對應節點<sp></sp>1<sp></sp>至<sp></sp>11：</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="1.0|1.1.1.0|1.0|0|1.1.1.0|0|0|1.0|1.1.0|0|0|0" data-src="/test/upload/20150516_02.png" data-srcset="/test/upload/20150516_02.png 2x, /test/upload/20150516_02-1x.png 1x">
+</figure>
+</div>
+<p>噢，你看到了<sp></sp>12<sp></sp>個區間？其實開頭的「10」是指我們一開始有根節點，即<sp></sp>1<sp></sp>號節點，應想作是其上還有一個虛擬根節點（0<sp></sp>號），這樣便好理解了。</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center bg-light">
+<img alt="0 -&gt; 1; 1 -&gt; { 2, 3, 4 }; 2 -&gt; 5; 4 -&gt; { 6, 7, 8 }; 7 -&gt; 9; 8 -&gt; { 10, 11 };" data-src="/test/upload/20150516_05.png" data-srcset="/test/upload/20150516_05.png 2x, /test/upload/20150516_05-1x.png 1x">
+</figure>
+<!-- ASCII
+      0   |     1     |   2   |  3  |     4     |  5  |  6  |   7   |    8    |  9  | 10  | 11
+     1.0  |  1.1.1.0  |  1.0  |  0  |  1.1.1.0  |  0  |  0  |  1.0  |  1.1.0  |  0  |  0  |  0 -->
+</div>
+<p>要根據這行比特串還原所有連結也很簡單，我就不贅述了。如此，只需<sp></sp>23<sp></sp>個比特便可表示所有連結。</p>
+<p>而傳統的位址法動輒<sp></sp>O(N*log(N))<sp></sp>比特（其結構如下），亦即最優情況下<sp></sp>2*11*4<sp></sp>比特，實際上往往爲<sp></sp>2*11*32<sp></sp>或<sp></sp>2*11*64<sp></sp>比特的空間佔用，實在是太浪費了。不過，LOUDS<sp></sp>還是有它的缺點，LOUDS<sp></sp>無法很好地動態擴展，只適用於表示靜態的樹結構。故實作時往往先利用位址法創建樹，其後再用<sp></sp>LOUDS<sp></sp>壓縮數據。</p>
+<div class="kaj-indented">
+<pre class="lang-cpp">
+<span class="hljs-keyword">struct</span> Node {
+    Node* first_child;
+    Node* next_sibling;
+};  <span class="hljs-comment">// 線索樹節點（便於層序遍歷）</span>
+</pre>
+</div>
+</div>
+<div id="kaj-section-3" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">LOUDS<sp></sp>索引號</a></h1>
+<p>現在我們來看看如何利用<sp></sp>LOUDS<sp></sp>實現高效的樹查詢。</p>
+<p>繼續引用之前那棵樹：</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center bg-light">
+<img alt="1 -&gt; { 2, 3, 4 }; 2 -&gt; 5; 4 -&gt; { 6, 7, 8 }; 7 -&gt; 9; 8 -&gt; { 10, 11 };" data-src="/test/upload/20150516_04.png" data-srcset="/test/upload/20150516_04.png 2x, /test/upload/20150516_04-1x.png 1x">
+</figure>
+</div>
+<p>以及其對應的<sp></sp>LOUDS<sp></sp>數據：</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="1.0|1.1.1.0|1.0|0|1.1.1.0|0|0|1.0|1.1.0|0|0|0" data-src="/test/upload/20150516_03.png" data-srcset="/test/upload/20150516_03.png 2x, /test/upload/20150516_03-1x.png 1x">
+</figure>
+</div>
+<section id="kaj-section-3-1" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">節點號與索引號的互換</a></h2>
+<p>由<sp></sp>LOUDS<sp></sp>索引號得到節點號不難，或者反過來，都要數出第幾個「1」，似乎有點慢。此處是優化的重點，一般要用到二分法並配以預計算好的查詢表。但這不是本文的重點。</p>
+</section>
+<section id="kaj-section-3-2" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">由子節點索引號得到父節點號</a></h2>
+<p>只要數一下左邊有多少個「0」便可。如下圖，由索引號<sp></sp>11<sp></sp>可得知其對應節點的父節點爲<sp></sp>4<sp></sp>號節點。</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="由子節點索引號得到父節點號" data-src="/test/upload/20150516_06.png" data-srcset="/test/upload/20150516_06.png 2x, /test/upload/20150516_06-1x.png 1x">
+</figure>
+</div>
+</section>
+<section id="kaj-section-3-3" class="kaj-section">
+<h2 class="kaj-title"><a href="#kaj-contents">由父節點號得到子節點索引號</a></h2>
+<p>只要數一下左邊的「0」便可。如下圖，由節點號<sp></sp>4<sp></sp>可得到其對應節點的子節點編號爲<sp></sp>6、7、8，分別對應索引號<sp></sp>9、10、11。</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="由父節點號得到子節點索引號" data-src="/test/upload/20150516_07.png" data-srcset="/test/upload/20150516_07.png 2x, /test/upload/20150516_07-1x.png 1x">
+</figure>
+</div>
+</section>
+</div>
+<div id="kaj-section-4" class="kaj-section">
+<h1 class="kaj-title"><a href="#kaj-contents">實例</a></h1>
+<p>LOUDS<sp></sp>的基本用法都介紹得差不多了，不如結合以下的<sp></sp>Trie<sp></sp>再看看<sp></sp>LOUDS：</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center bg-light">
+<img alt="&quot;&quot; -&gt; &quot;一&quot;; &quot;&quot; -&gt; &quot;兩&quot;; &quot;&quot; -&gt; &quot;今&quot;; &quot;一&quot; -&gt; &quot;本&quot;; &quot;本&quot; -&gt; &quot;書&quot;; &quot;本&quot; -&gt; &quot;萬&quot; -&gt; &quot;利&quot;; &quot;一&quot; -&gt; &quot;根&quot;; &quot;根&quot; -&gt; &quot;筋&quot;; &quot;兩&quot; -&gt; &quot;人&quot;; &quot;今&quot; -&gt; &quot;天&quot;;" data-src="/test/upload/20150516_08.png" data-srcset="/test/upload/20150516_08.png 2x, /test/upload/20150516_08-1x.png 1x">
+</figure>
+</div>
+<p>可眞是省空間：</p>
+<div class="kaj-indented">
+<figure class="kaj-image-png center">
+<img alt="1.0|1.1.1.0|1.1.0|1.0|1.0|1.1.0|1.0|0|0|0|1.0|0|0" data-src="/test/upload/20150516_09.png" data-srcset="/test/upload/20150516_09.png 2x, /test/upload/20150516_09-1x.png 1x">
+</figure>
+</div>
+<p>現在來查找匹配「一根筋」：</p>
+<div class="kaj-indented">
+<ol>
+<li><p>先找到根節點的子節點，看<sp></sp>LOUDS<sp></sp>第<sp></sp>1<sp></sp>個「0」後的連續幾個「1」的索引號，找到三個字符，其中有「一」，節點號是<sp></sp>2。</p>
+<figure class="kaj-image-png center">
+<img data-src="/test/upload/20150516_10.png" data-srcset="/test/upload/20150516_10.png 2x, /test/upload/20150516_10-1x.png 1x">
+</figure></li>
+<li><p>繼續看<sp></sp>2<sp></sp>號節點的的子節點，看<sp></sp>LOUDS<sp></sp>第<sp></sp>2<sp></sp>個「0」後的連續幾個「1」的索引號，找到兩個字符，其中有「根」，節點號是<sp></sp>6。</p>
+<figure class="kaj-image-png center">
+<img data-src="/test/upload/20150516_11.png" data-srcset="/test/upload/20150516_11.png 2x, /test/upload/20150516_11-1x.png 1x">
+</figure></li>
+<li><p>最後是「筋」，也用同樣的方法找到了。</p>
+<figure class="kaj-image-png center">
+<img data-src="/test/upload/20150516_12.png" data-srcset="/test/upload/20150516_12.png 2x, /test/upload/20150516_12-1x.png 1x">
+</figure></li>
+</ol>
+</div>
+<p>其實，還需要第另一個比特串用於標示對應節點是否可作爲詞條的末端，以解決路徑節點複用的問題。</p>
+</div>
+<footer>
+<table class="kaj-cite-def" id="kaj-cite-def-%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99">
+<tr>
+<td class="kaj-label">[參考資料]</td><td><a class="kaj-link-external" href="http://d.hatena.ne.jp/takeda25/20120421/1335019644">簡潔データ構造<sp></sp>LOUDS<sp></sp>の解説</a></td>
+</tr>
+</table>
+</footer></article>
+    <div class="meta">
+      
+<div class="license">
+  
+  <div>該文寫於 2015 年 05 月 29 日</div>
+  <div>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">創用 CC BY-NC-SA 4.0 授權 © 2015</a>
+    <a rel="author" href="/test/pages/about/">J.W</a>
+  </div>
+  
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+<link rel="stylesheet" href="/test/data/css/highlight.css">
+
+
+
+<script src="/test/data/js/belazy.js"></script>
+<script src="/test/data/js/belazy.cfg.js"></script>
+
+
+
+
+
+    
+  </body>
+
+</html>
